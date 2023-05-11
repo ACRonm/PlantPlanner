@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.sp
 import com.acronm.plantplanner.ui.theme.PlantPlannerTheme
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -22,46 +23,62 @@ class MainActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background)
                 {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(16.dp)
-                    ) {
-                        Text(
-                            text = "Plant Planner",
-                            style = MaterialTheme.typography.titleLarge
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Text(
-                            text = "Plant Planner is a simple app to help you plan your garden.",
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        OutlinedButton(
-                            onClick = { /*TODO*/ },
-                            modifier = Modifier
-                                .height(48.dp)
-                                .fillMaxWidth()
-                        ) {
-                            Text(
-                                text = "Get Started",
-                                style = MaterialTheme.typography.labelSmall
-                            )
-                        }
-                        Spacer(modifier = Modifier.height(16.dp))
-                        LazyColumn(
-                            modifier = Modifier.fillMaxSize(),
-                            verticalArrangement = Arrangement.spacedBy(16.dp)
-                        ) {
-                            items(10) {
-                                Card {
-
-        }
-                            }
-                        }
-                    }
+                    CardLayout()
                 }
             }
         }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CardLayout() {
+    Column(
+        modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+    ) {
+        Text(
+            text = "Plant Planner",
+            style = MaterialTheme.typography.titleLarge
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            items(10) {
+                ElevatedCard(onClick = { /*TODO*/ }) {
+                    Column(
+                        modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp)
+                    ) {
+                        Text(
+                            text = "Plant Name",
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Plant Description",
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Plant Date",
+                            style = MaterialTheme.typography.labelSmall
+                        )
+                }
+                }
+            }
+        }
+    }
+}
+
+@Preview (showBackground = true)
+@Composable
+fun CardLayoutPreview() {
+    PlantPlannerTheme {
+        CardLayout()
     }
 }
