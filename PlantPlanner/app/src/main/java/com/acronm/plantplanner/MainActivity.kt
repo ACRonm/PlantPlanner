@@ -19,45 +19,45 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PlantPlannerTheme {
-                var name by remember {
-                    mutableStateOf("")
-                }
-                var names by remember {
-                    mutableStateOf(listOf<String>())
-                }
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp)
-                ){
-                    Row(modifier = Modifier.fillMaxWidth()
+                Surface(modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.background)
+                {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp)
                     ) {
-                        OutlinedTextField(
-                            value = name,
-                            onValueChange = {
-                                    text -> name = text
-                                            },
-                            modifier = Modifier
-                                .weight(1f),
+                        Text(
+                            text = "Plant Planner",
+                            style = MaterialTheme.typography.titleLarge
                         )
-                        Spacer (modifier = Modifier.width(8.dp))
-                        Button(onClick = {
-                            if (name.isNotBlank())
-                                names = names + name
-                                name = ""
-                        })
-                        {
-                            Text(text = "Add")
-                        }
-                    }
-
-                    LazyColumn {
-                        items(names.size) {
-                            Text(text = names[it],
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = "Plant Planner is a simple app to help you plan your garden.",
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        OutlinedButton(
+                            onClick = { /*TODO*/ },
                             modifier = Modifier
-                                .padding(16.dp)
-                                .fillMaxWidth())
-                            Divider()
+                                .height(48.dp)
+                                .fillMaxWidth()
+                        ) {
+                            Text(
+                                text = "Get Started",
+                                style = MaterialTheme.typography.labelSmall
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(16.dp))
+                        LazyColumn(
+                            modifier = Modifier.fillMaxSize(),
+                            verticalArrangement = Arrangement.spacedBy(16.dp)
+                        ) {
+                            items(10) {
+                                Card {
+
+        }
+                            }
                         }
                     }
                 }
